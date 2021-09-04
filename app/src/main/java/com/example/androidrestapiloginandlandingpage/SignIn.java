@@ -7,7 +7,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.List;
@@ -22,8 +21,10 @@ public class SignIn extends AppCompatActivity {
     private EditText Name;
     private EditText Password;
     private Button Login;
+    private int counter = 1;
     private TextView Error_Message;
     private String[][] all_users;
+    private TextView textViewResult;
 
 
     @Override
@@ -35,6 +36,7 @@ public class SignIn extends AppCompatActivity {
         Password = (EditText) findViewById(R.id.password);
         Login = (Button) findViewById(R.id.login);
         Error_Message = (TextView) findViewById(R.id.error_message);
+        textViewResult = findViewById(R.id.text_view_result);
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://jsonplaceholder.typicode.com/")
@@ -48,7 +50,7 @@ public class SignIn extends AppCompatActivity {
 
         call.enqueue(new Callback<List<User>>() {
             @Override
-            public void onResponse(@NonNull Call<List<User>> call, @NonNull Response<List<User>> response) {
+            public void onResponse(Call<List<User>> call, Response<List<User>> response) {
 
                 List<User> users = response.body();
 
@@ -66,7 +68,7 @@ public class SignIn extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<List<User>> call, Throwable t) {
-
+                textViewResult.setText(t.getMessage());
             }
         });
 
