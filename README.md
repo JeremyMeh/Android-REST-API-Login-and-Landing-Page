@@ -1,2 +1,2 @@
 # Android-REST-API-Login-and-Landing-Page
-#This code does not work, there are no tests, and it does not run the app.
+The app runs, however it does not have tests and the app crashes when you input incorrect credentials.
